@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="GA software development challenge">
+	<meta name="author" content="Robert Ellis">
+	<meta name="email" content="rellis@getmehere.com">
+	<meta name="web" content="http://getmehere.com">
+	<meta name="repo" content="https://github.com/robertgetmehere/GAFairSwDevChallenge.git">
+	<meta name="linkedin" content="http://www.linkedin.com/in/robertdellis">
+	<link rel="stylesheet" href="jam/bootstrap/docs/assets/css/bootstrap.css"/>
+	<link rel="stylesheet" href="assets/css/style.css"/>
+	<script src='jam/require.js'></script>
+	<title>GA Software Development Exercise</title>
+</head>
+<body>
+<div class="basicBox header">
+analyse words in a file...
+</div>
+<div class="basicBox">
+	<form action='/' method="post" enctype="multipart/form-data">
+		<div class="formLabel">
+		search for:
+		</div>
+		<input name="searchText" id="searchText" type="text" value="peace" placeholder="text to find"/>
+		<div class="formLabel">
+		in file:
+		</div>
+		<div class="findFile">
+			<input name="fileName" id="fileName" type="file" placeholder="find the file you want"/>
+		</div>
+		<button type="submit" class="btn btn-success">
+			<i class="icon-search icon-white"></i>
+			Search
+		</button>
+	</form>
+</div>
+<script language="JavaScript">
+	require(
+			[
+							'app/main'
+			],
+			function(AppView) {
+				window.app = new AppView;
+				window.app.render();
+
+			}
+	)
+</script>
+</body>
+</html>
