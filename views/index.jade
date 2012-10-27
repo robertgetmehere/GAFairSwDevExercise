@@ -1,0 +1,30 @@
+!!! 5
+html(lang='en')
+head
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    meta(name='description', content='GA software development exercise')
+    meta(name='author', content='Robert Ellis')
+    meta(name='email', content='rellis@getmehere.com')
+    meta(name='web', content='http://getmehere.com')
+    meta(name='repo', content='https://github.com/robertgetmehere/GAFairSwDevExercise.git')
+    meta(name='linkedin', content='http://www.linkedin.com/in/robertdellis')
+    link(rel='stylesheet', href='assets/css/bootstrap.css')
+    link(rel='stylesheet', href='assets/css/style.css')
+    title GA Software Development Exercise
+  body
+    .basicBox.header
+      | analyse words in a file...
+    .basicBox
+
+
+      form(action='/', method='post', enctype='multipart/form-data')
+        .formLabel
+          | search for:
+        input#searchText(name='searchText', type='text', value='peace', placeholder='text to find')
+        .formLabel
+          | in file:
+        .findFile
+          input#fileName(name='fileName', type='file', placeholder='find the file you want')
+        button.btn.btn-success(type='submit')
+          | analyze

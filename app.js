@@ -6,6 +6,7 @@
     var _               = require('underscore');
     var http            = require('http');
     var fs              = require('fs');
+    var debug           = false;
 
     /*INITIALIZE SERVER*/
 
@@ -22,15 +23,26 @@
     app.configure(function () {
         app.use(express.bodyParser({keepExtensions: true,uploadDir: '/tmp'}));
         app.use(express.methodOverride());
-        app.register('.html', {
+        app.set('views', __dirname + '/views');
+        app.set('view engine', 'jade');
+        app.set('view options', {layout : false})
+
+/*        app.register('.html', {
             compile:function (str, options) {
                 return function (locals) {
                     return str;
                 };
             }
-        });
+        });*/
     });
 
+    app.get('/', function(req, res){
+        res.render('index', {layout : false});
+    });
+
+    app.get('/result',function(req,res){
+        res.render('result');
+    });
     app.post('/',function(req,res){
         if (req.files.fileName.length > 0 && typeof req.body.searchText != 'undefined') {
             var readStream = fs.ReadStream(req.files.fileName.path);
@@ -42,24 +54,66 @@
             });
 
             readStream.on('close', function () {
-                console.log("I finished reading - now start processing");
-                console.log('file is ' + out.length + ' characters in length');
-                //step 1: clean out punctuation and consolidate white space
+
+
+                console.log("finished reading file - start processing");
+
+                console.log('\n>>file is ' + out.length + ' characters in length\n');
+
+                console.log('step 1: clean out punctuation and consolidate white space');
+
                 out = out.replace(/[^\w\s]|_/g, "").replace(/\s+/g, " ");
-                //step 2: convert to lower case
+
+                console.log('step 2: convert to lower case');
+
                 out = out.toLowerCase();
-                //step 3: strip title text - begin at chapter 1
-                //this could be a parameter in the form
-                //as could where to stop too
+
+                console.log('step 3: start at chapter 1 - ignore title and terms');
 
                 out = out.substring(out.indexOf('chapter 1')+9,out.length);
 
-                //step 4: split into words
+                console.log('step 4: split into words');
+
                 var words = out.split(/[\s\/]+/g);
 
-                //step 5: calculate frequency and position
+                console.log('\n>>found ' + words.length + ' words\n');
 
-                res.send();
+                console.log('step 5: calculate frequency and position');
+
+                var counts = new Array(); // object for math
+                var totalCount = 0;
+                for (var i=0; i<words.length; i++) {
+                    var sWord = words[i];
+                    if (sWord == req.body.searchText.toLowerCase()) {
+                        if (debug) console.log('found ' + req.body.searchText + ' at position ' + i);
+                        counts.push(i);
+                        totalCount++;
+                    }
+                }
+
+                console.log('\n>>found ' + req.body.searchText + ' a total of ' + totalCount + ' times\n');
+
+                console.log('step 6: calculate average number of words between each occurrence');
+
+                var tmp = 0;
+                for (var i=0;i<counts.length-1;i++){
+                    tmp += counts[i+1]-counts[i];
+                    if (debug) console.log('words between is ' + (counts[i+1]-counts[i]));
+                }
+                console.log('\n>>average number of words between each occurrence is ' + Math.round(tmp/totalCount,2) + '\n');
+
+                var ret = {
+                    errorLevel:             0
+                    ,searchWord:             req.body.searchText
+                    ,timesFound:            totalCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    ,averageWordDistance:   Math.round(tmp/totalCount,2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    ,fileLength:            out.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    ,wordCount:             words.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                };
+
+                console.log('step 7: return result to result.jade template');
+
+                res.render('result',{result:ret,layout : false});
             });
 
 
@@ -67,12 +121,13 @@
             logError(res,'file required');
         }
     });
+
     app.listen(8443);
 
     var logError=function(res,msg) {
         console.log(msg);
-        res.send({errorLevel: 1,message:msg});
-
+        ret = {errorLevel: 1,message:msg};
+        res.render('result',{result: ret,layout:false});
     }
 
 }).call(this);

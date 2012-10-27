@@ -26,6 +26,13 @@ a
     left:50%;
     margin-left:-450px;
 }
+.bigBox
+{
+    height:200px;
+    font-size:24px;
+    line-height:30px;
+    text-align:center;
+}
 .header
 {
     top:0;
