@@ -22,5 +22,10 @@ head
 				| the word "#{result.searchWord}" was found #{result.timesFound} times in #{result.wordCount} words
 				br
 				| the average distance between occurrences is #{result.averageWordDistance} words
+				br
+				br
+				| on a rolling sample basis the most common triple word phrase is "#{result.tripleWord.triple}"
+				br
+				| which occurs a total of #{result.tripleWord.frequency} times
 			else
 				| error #{result.message}

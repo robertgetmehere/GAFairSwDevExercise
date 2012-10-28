@@ -100,18 +100,49 @@
                     tmp += counts[i+1]-counts[i];
                     if (debug) console.log('words between is ' + (counts[i+1]-counts[i]));
                 }
+
                 console.log('\n>>average number of words between each occurrence is ' + Math.round(tmp/totalCount,2) + '\n');
+
+                console.log('step 7: find the most common 3 word phrase in the text');
+
+                var threeword = new Array();
+                for (var i=0;i<words.length-2;i++) {
+                    threeword.push(words[i] + ' ' + words[i+1] + ' ' + words[i+2]);
+                }
+
+                var threecounts = {};
+                for (var i=1;i<threeword.length;i++) {
+                    var sWord = threeword[i];
+                    threecounts[sWord] = threecounts[sWord] || 0;
+                    threecounts[sWord]++;
+                }
+
+                var most = {triple: '',frequency:0};
+                for (sWord in threecounts) {
+                    var r={
+                        triple: sWord,
+                        frequency: threecounts[sWord]
+                    };
+                    if (r.frequency > most.frequency) {
+                        most.triple = r.triple;
+                        most.frequency = r.frequency;
+                    }
+                }
+
+                console.log('\n>>most common three word phrase is "' + most.triple + '" which occurs ' + most.frequency + ' times\n');
 
                 var ret = {
                     errorLevel:             0
-                    ,searchWord:             req.body.searchText
+                    ,searchWord:            req.body.searchText
                     ,timesFound:            totalCount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     ,averageWordDistance:   Math.round(tmp/totalCount,2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     ,fileLength:            out.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                     ,wordCount:             words.length.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                    ,tripleWord:            most
+
                 };
 
-                console.log('step 7: return result to result.jade template');
+                console.log('step 8: return result to result.jade template');
 
                 res.render('result',{result:ret,layout : false});
             });
