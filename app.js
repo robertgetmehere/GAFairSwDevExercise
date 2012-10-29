@@ -104,11 +104,18 @@
                 console.log('\n>>average number of words between each occurrence is ' + Math.round(tmp/totalCount,2) + '\n');
 
                 console.log('step 7: find the most common 3 word phrase in the text');
+                //use a rolling average as we don't know where a 3 word phrase starts or finishes
+                //store each 3 word triple in a new array (threeword)
 
                 var threeword = new Array();
                 for (var i=0;i<words.length-2;i++) {
                     threeword.push(words[i] + ' ' + words[i+1] + ' ' + words[i+2]);
                 }
+
+                console.log('step 8: count the number of occurrences of each 3 word triple');
+                //store occurrences in object literal so we can reference occurrences
+                //if word is not yet in list add it and increment count of occurrences by 1
+                //if word is already in list then increment number of occurrences by 1
 
                 var threecounts = {};
                 for (var i=1;i<threeword.length;i++) {
@@ -118,6 +125,9 @@
                 }
 
                 var most = {triple: '',frequency:0};
+
+                console.log('step 9: work out which 3 word triple is the most common');
+
                 for (sWord in threecounts) {
                     var r={
                         triple: sWord,
@@ -130,6 +140,8 @@
                 }
 
                 console.log('\n>>most common three word phrase is "' + most.triple + '" which occurs ' + most.frequency + ' times\n');
+
+                console.log('step 10: create output object to store calculated results');
 
                 var ret = {
                     errorLevel:             0
