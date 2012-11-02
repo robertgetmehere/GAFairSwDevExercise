@@ -1,8 +1,8 @@
 body{
-    background-image:url('../img/bg_dark.png');
+    background-image:url('../img/bg.png');
     width:100%;
     font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;
-    color:#efefef;
+    color:#343434;
     line-height: 18px;
     font-size:14px;
     background-color:#ededef;
@@ -63,6 +63,7 @@ a {
     font-size:24px;
     line-height:30px;
     text-align:center;
+    border-bottom: 1px solid #999;
 }
 .findFile
 {
@@ -89,7 +90,6 @@ a {
     line-height:30px;
     display:block;
     float:left;
-    color:#efefef;
     text-align: right;
 }
 .seriesOut
@@ -116,7 +116,108 @@ input
     font-size:20px;
     line-height:30px;
     border:1px solid #999;
-    color:#343434;
     box-shadow:inset -1px 1px 2px rgba(68,68,68,0.5);
 
+}
+.support
+{
+    width:850px;
+    height:46px;
+    padding-top:10px;
+    text-align: center;
+    display:block;
+    position:relative;
+    z-index:100;
+    top:0;
+    left:50%;
+    margin-left:-425px;
+    line-height:16px;
+}
+.panel
+{
+    width:45%;
+    height:36px;
+    font-size:10px;
+    line-height: 12px;
+    display:block;
+    text-align:left;
+}
+.left
+{
+    float:left;
+}
+.right
+{
+    float:right;
+}
+
+.nav
+{
+    list-style-type: none;
+    margin:0;
+    padding:0;
+    float:right;
+}
+.nav li
+{
+    margin:0;
+    float:left;
+    width:30px;
+    height:30px;
+    margin-right:25px;
+    display:block;
+}
+.noright
+{
+    margin-right:0;
+}
+.nav li a
+{
+    width:30px;
+    height:30px;
+    display: block;
+}
+.icon
+{
+    background-image:url('../img/sprites.png');
+    width:30px;
+    height:30px;
+    display:block;
+    cursor:pointer;
+}
+.em
+{
+    background-image:url('../img/email.png');
+}
+.wb
+{
+    background-image:url('../img/web.png');
+}
+.gt
+{
+    background-image:url('../img/github.png');
+}
+.fb
+{
+    background-position: 0px 0px;
+}
+.tw
+{
+    background-position: -30px 0px;
+}
+.fl
+{
+    background-position: -60px 0px;
+}
+.vm
+{
+    background-position: -90px 0px;
+}
+.gp
+{
+    background-position: -120px 0px;
+}
+.li
+{
+    background-position: -150px 0px;
 }

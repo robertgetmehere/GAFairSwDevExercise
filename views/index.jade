@@ -1,35 +1,52 @@
 !!! 5
 html(lang='en')
-head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    meta(name='description', content='GA software development exercise')
-    meta(name='author', content='Robert Ellis')
-    meta(name='email', content='rellis@getmehere.com')
-    meta(name='web', content='http://getmehere.com')
-    meta(name='repo', content='https://github.com/robertgetmehere/GAFairSwDevExercise.git')
-    meta(name='linkedin', content='http://www.linkedin.com/in/robertdellis')
-    link(rel='stylesheet', href='assets/css/bootstrap.css')
-    link(rel='stylesheet', href='assets/css/style.css')
-    title GA Software Development Exercise
+	head
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		meta(name='description', content='GA software development exercise')
+		meta(name='author', content='Robert Ellis')
+		meta(name='email', content='rellis@getmehere.com')
+		meta(name='web', content='http://getmehere.com')
+		meta(name='repo', content='https://github.com/robertgetmehere/GAFairSwDevExercise.git')
+		meta(name='linkedin', content='http://www.linkedin.com/in/robertdellis')
+		link(rel='stylesheet', href='assets/css/bootstrap.css')
+		link(rel='stylesheet', href='assets/css/style.css')
+		title GA Software Development Exercise
 
-    <!-- this is my second submission for this challenge - It improves on my first submission -->
-    <!-- which I submitted as is before the hurricane in case of long term power outage -->
+		<!-- this is my second submission for this challenge - It improves on my first submission -->
+		<!-- which I submitted as is before the hurricane in case of long term power outage -->
 
-  body
-    .smallBox.header
-      div.galogo
-      | Software Development Exercise
-    .basicBox
+	body
+		.smallBox.header
+			div.galogo
+			| Software Development Exercise
+		.basicBox
 
 
-      form(action='/', method='post', enctype='multipart/form-data')
-        .formLabel
-          | search for:
-        input#searchText(name='searchText', type='text', value='peace', placeholder='text to find')
-        .formLabel
-          | in file:
-        .findFile
-          input#fileName(name='fileName', type='file', placeholder='find the file you want')
-        button.btn.btn-success(type='submit')
-          | analyze
+			form(action='/', method='post', enctype='multipart/form-data')
+				.formLabel
+					| search for:
+				input#searchText(name='searchText', type='text', value='peace', placeholder='text to find')
+				.formLabel
+					| in file:
+				.findFile
+					input#fileName(name='fileName', type='file', placeholder='find the file you want')
+				button.btn.btn-success(type='submit')
+					| analyze
+		.basicBox.bigBox
+		.support
+			.panel.left
+				| This challenge was submitted by Robert D. Ellis.
+				br
+				| To find out more view the &nbsp;
+				a(href='SoftwareDevelopmentChallengePseudoCode.pdf', target='_blank') pseudo code
+			.panel.right
+				ul.nav
+					li.icon.em
+						a(href='mailto:rellis@getmehere.com?subject=GA%20Software%20Development%20Exercise', target='_blank') &nbsp;
+					li.icon.li
+						a(href='http://www.linkedin.com/in/robertdellis', target='_blank')  &nbsp;
+					li.icon.wb
+						a(href='http://getmehere.com', target='_blank')
+					li.icon.gt(style='margin-right: 0;')
+						a(href='https://github.com/robertgetmehere/GAFairSwDevExercise.git', target='blank')  &nbsp;
